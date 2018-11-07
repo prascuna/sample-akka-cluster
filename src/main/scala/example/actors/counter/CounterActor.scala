@@ -12,8 +12,10 @@ class CounterActor extends Actor with ActorLogging {
 
   override def receive: Receive = {
     case IncrementCmd(value, user) =>
+      log.info(s"MESSAGE RECEIVED: ${self.path}")
       state = state.copy(state.count + value, Some(user))
     case ReadValueCmd =>
+      log.info(s"MESSAGE RECEIVED: ${self.path}")
       sender() ! state
 
     case _ =>
